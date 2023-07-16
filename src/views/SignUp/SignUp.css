@@ -1,0 +1,17 @@
+#signup_form {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    width: 200px;
+}
+
+.signup_label {
+    margin-top: 10px;
+}
+
+#signup_submit_btn {
+    width: 60px;
+    margin: 0 auto;
+    margin-top: 20px;
+}

@@ -1,0 +1,17 @@
+#signin_form {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    width: 200px;
+}
+
+.signin_label {
+    margin-top: 10px;
+}
+
+#signin_submit_btn {
+    width: 60px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
