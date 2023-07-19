@@ -1,0 +1,81 @@
+#navbar_container {
+    padding: 10px;
+    height: 99.8vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 8fr 1fr;
+    gap: 10px;
+}
+
+
+#upper_area {
+    background-color: lightblue;
+}
+
+#app_logo_container {
+    background-color: rgb(232, 226, 226);
+    border-radius: 3px;
+    padding: 5px;
+    width: 150px;
+    font-size: 24px;
+}
+
+
+
+
+#middle_area {
+    background-color: lightcoral;
+}
+
+#search_form {
+    border: 1px solid black;
+    margin-top: 30px;
+    text-align: center;
+}
+
+
+
+#search_input_container {
+   display: inline-block;
+}
+
+#search_input {
+    width: 224px;
+    height: 37px;
+    border: none;
+    border-radius: 17px;
+    padding-left: 7px;
+    font-size: 18px;
+    background-color: lightgray;
+}
+
+
+#search_btn_container {
+    display: inline;
+    margin-left: 4px;
+}
+
+#search_btn {
+    background-color: orange;
+    border: none;
+    font-size: 19px;
+}
+
+
+#page_links_container {
+    border: 1px solid black;
+    padding-top: 30px;
+    text-align: center;
+}
+
+.navbar_link {
+    display: block;
+    margin-bottom: 20px;
+}
+
+
+
+#lower_area {
+    background-color: lightgoldenrodyellow
+}
+

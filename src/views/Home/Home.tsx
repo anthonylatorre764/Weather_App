@@ -1,68 +1,121 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../../firebase";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import NavBar from "../../components/NavBar/NavBar";
+import "./Home.css";
 
-interface CurrentUser {
-  id: string;
-  email: string;
-}
+
+
 
 const Home = () => {
-    const getData = async () => {
-      const response = await fetch(
-        "https://api.openweathermap.org/data/2.5/weather?lat=40.367390&lon=-75.293610&appid=40cf4c122703c3c0ef79881bdef0bd80"
-      );
-      const data = await response.json();
-      console.log(data);
-    };
 
-
-    const [user, setUser] = useState<CurrentUser | null>(null);
-    
-    // get current user's email and uid
-    useEffect(() => {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          const email = user.email;
-          const id = user.uid;
-          // Type Narrowing
-          if (typeof email === "string" && typeof id === "string") {
-            setUser({ id: id, email: email });
-          }
-        }
-      });
-    });
-
-    const navigate = useNavigate()
-
-    // sign out user
-    const handleSignOut = () => {
-        signOut(auth).then(() => {
-          setUser(null)
-          navigate('/signin')
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage)
-        })
-    }
-
-
-  return (
-    <>
-      <div>Home</div>
-
-      {/* Use this ternary operator in NavBar */}
-      {user ? <span>Hello {user.email}</span>: <span>no one is signed in</span>}
-
-      <button onClick={getData}>Get Weather</button>
-      
-      {/* Place Sign Out button on the bottom of vertical NavBar */}
-      <button onClick={handleSignOut}>Sign Out</button>
-    </>
-  );
+    return (
+        <>
+            <div id="grid_container">
+                <NavBar/>
+                <div id="home_page">
+                    {/* Display weather data */}
+                    {true ? (
+                        <div id="weather_data_container">
+                            <div id="upper_section">
+                                <div id="city">Perkasie</div>
+                                <div id="temps_box">
+                                    <div id="current_temp">70&deg; F</div>
+                                    <div id="HL_temps">H: 80&deg; &nbsp; L: 60&deg;</div>
+                                </div>
+                                <div id="current_weather">Partly Sunny</div>
+                                <div id="weather_icon">⛅</div>
+                            </div>
+                            <div id="middle_section">
+                                <h3 id="hourly_head">Hourly</h3>
+                                <div id="hourly_container">
+                                    <div id="hour0">
+                                        <p className="time">7pm</p>
+                                        <p className="temp">75&deg;</p>
+                                        <p>Sunny</p>
+                                    </div>
+                                    <div className="hour">
+                                        <p className="time">8pm</p>
+                                        <p className="temp">73&deg;</p>
+                                        <p>Partly Cloudy</p>
+                                    </div>
+                                    <div className="hour">
+                                        <p className="time">9pm</p>
+                                        <p className="temp">68&deg;</p>
+                                        <p>Partly Cloudy</p>
+                                    </div>
+                                    <div className="hour">
+                                        <p className="time">10pm</p>
+                                        <p className="temp">65&deg;</p>
+                                        <p>Partly Cloudy</p>
+                                    </div>
+                                    <div className="hour">
+                                        <p className="time">11pm</p>
+                                        <p className="temp">63&deg;</p>
+                                        <p>Partly Cloudy</p>
+                                    </div>
+                                    <div className="hour">
+                                        <p className="time">12am</p>
+                                        <p className="temp">60&deg;</p>
+                                        <p>Partly Cloudy</p>
+                                    </div>
+                                    <div className="hour">
+                                        <p className="time">1am</p>
+                                        <p className="temp">60&deg;</p>
+                                        <p>Clear</p>
+                                    </div>
+                                    <div className="hour">
+                                        <p className="time">2am</p>
+                                        <p className="temp">60&deg;</p>
+                                        <p>Clear</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="lower_section">
+                                <div className="lower_item">
+                                    <h4 className="item_head">Wind</h4>
+                                    <p>5 mph NW</p>
+                                </div>
+                                <div className="lower_item"> 
+                                    <h4 className="item_head">Feels Like</h4>
+                                    <p>75&deg;</p>
+                                </div>
+                                <div className="lower_item"> 
+                                    <h4 className="item_head">Humidity</h4>
+                                    <p>45%</p>
+                                </div>
+                                <div className="lower_item"> 
+                                    <h4 className="item_head">UV Index</h4>
+                                    <p>7</p>
+                                </div>
+                                <div className="lower_item"> 
+                                    <h4 className="item_head">Visibility</h4>
+                                    <p>11 mi</p>
+                                </div>
+                                <div className="lower_item"> 
+                                    <h4 className="item_head">Precipitation</h4>
+                                    <p>0" last 24hr</p>
+                                </div>
+                                <div className="lower_item"> 
+                                    <h4 className="item_head">Air Quality</h4>
+                                    <p>33 - Good</p>
+                                </div>
+                                <div className="lower_item"> 
+                                    <h4 className="item_head">Sunset</h4>
+                                    <p>8:29 pm</p>
+                                </div>
+                            </div>
+                        </div>
+                    ) : null}
+                </div>
+            </div>
+        </>
+    );
 };
 
 export default Home;
+
+
+
+// (city,country)
+// https://api.aerisapi.com/conditions/vancouver,bc?format=json&plimit=1&filter=1min&client_id=[CLIENT_ID]&client_secret=[CLIENT_SECRET]
+
+// current location -> (:auto)
+// https://api.aerisapi.com/conditions/:auto?format=json&plimit=1&filter=1min&client_id=[CLIENT_ID]&client_secret=[CLIENT_SECRET]
